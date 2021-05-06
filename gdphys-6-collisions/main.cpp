@@ -16,6 +16,16 @@
 #include "P6 Components/Springs/BungeeSpring.h"
 #include "P6 Components/Collision/ParticleContact.h"
 
+/*NOTES 5/6/2021 11:38 AM
+* Added working collision
+* Manually added 5 particles
+* Collision works when user presses SPACE to start sim
+* 
+* WHAT NEEDS TO BE ADDED:
+* - cable class implementation (i already added a Cable class)
+* - fix initial velocity when user starts simulation
+*/
+
 
 #define PI 3.14159
 
@@ -44,24 +54,16 @@ int main()
     //bullet.addForce(dir * 50);
     
 
-    bullet.particleShape.setRadius(50.0f);
+    bullet.particleShape.setRadius(15.0f);
     bullet.radius = bullet.particleShape.getRadius();
     bullet.particleShape.setFillColor(sf::Color::White);
     bullet.particleShape.setOrigin(bullet.particleShape.getRadius(), bullet.particleShape.getRadius());
 
     PhysVector renderPoint1 = bullet.toRenderPoint();
-    bullet.position = PhysVector(245,20);
+    bullet.position = PhysVector(245,0);
 
     bullet.initialPos = bullet.position;
     bullet.particleShape.setPosition(renderPoint1.x, renderPoint1.y);
-    //bullet.particleShape.setPosition(bullet.position.x, bullet.position.y);
-
-   
-
-    //NEEDS WORK
-    //DragForceGenerator dF = DragForceGenerator(0.1,0.01);
-    //pWorld.registry.add(&bullet, &dF);
-    //NEEDS WORK
 
 
     //BULLET 2
@@ -72,60 +74,85 @@ int main()
     //bullet2.addForce(dir2 * 50);
     
 
-    bullet2.particleShape.setRadius(50.0f);
+    bullet2.particleShape.setRadius(15.0f);
     bullet2.radius = bullet2.particleShape.getRadius();
     bullet2.particleShape.setFillColor(sf::Color::Blue);
     bullet2.particleShape.setOrigin(bullet2.particleShape.getRadius(), bullet2.particleShape.getRadius());
 
     PhysVector renderPoint2 = bullet2.toRenderPoint();
-    bullet2.position = PhysVector(160, -30);
+    bullet2.position = PhysVector(280, 0);
 
     bullet2.initialPos = bullet2.position;
     bullet2.particleShape.setPosition(renderPoint2.x, renderPoint2.y);
 
-    //BungeeSpring bS = BungeeSpring(bullet2.position, 5, 20);
-    //AnchoredSpring aS = AnchoredSpring(bullet2.position, 5, 1);
-
-    pWorld.addParticle(&bullet);
-    pWorld.addParticle(&bullet2);
     
-    //pWorld.registry.add(&bullet2, &bS);
-
-    /*
     //BULLET 3
     PhysParticle bullet3;
     bullet3.name = "Bullet 3";
     bullet3.mass = 1.5;
     //PhysVector dir3 = PhysVector(1, 0);
     //bullet3.addForce(dir3 * 50);
-    bullet3.velocity = PhysVector(0, -40);
+    bullet3.velocity = PhysVector(0, 0);
 
-    bullet3.particleShape.setRadius(50.0f);
+    bullet3.particleShape.setRadius(15.0f);
+    bullet3.radius = bullet3.particleShape.getRadius();
     bullet3.particleShape.setFillColor(sf::Color::Green);
     bullet3.particleShape.setOrigin(bullet3.particleShape.getRadius(), bullet3.particleShape.getRadius());
 
     PhysVector renderPoint3 = bullet3.toRenderPoint();
-    bullet3.position = PhysVector(160, 300);
+    bullet3.position = PhysVector(315, 0);
 
     bullet3.initialPos = bullet3.position;
     bullet3.particleShape.setPosition(renderPoint3.x, renderPoint3.y);
 
-    pWorld.addParticle(&bullet3);
-    */
-
-    /*
-    ParticleContact contact = ParticleContact();
-    contact.particles[0] = &bullet;
-    contact.particles[1] = &bullet2;
-    contact.collisonNormal = bullet.position - bullet2.position;
-    contact.collisonNormal = contact.collisonNormal.normalize();
-    contact.restitution = 0.6;
     
+    //BULLET 4
+    PhysParticle bullet4;
+    bullet4.name = "Bullet 4";
+    bullet4.mass = 1.5;
+    //PhysVector dir3 = PhysVector(1, 0);
+    //bullet3.addForce(dir3 * 50);
+    bullet4.velocity = PhysVector(0, 0);
 
-    PhysVector dir = bullet.position - bullet2.position;
-    dir = dir.normalize();
-    pWorld.addContact(&bullet, &bullet2, 0.6, dir);
-    */
+    bullet4.particleShape.setRadius(15.0f);
+    bullet4.radius = bullet4.particleShape.getRadius();
+    bullet4.particleShape.setFillColor(sf::Color::Red);
+    bullet4.particleShape.setOrigin(bullet4.particleShape.getRadius(), bullet4.particleShape.getRadius());
+
+    PhysVector renderPoint4 = bullet4.toRenderPoint();
+    bullet4.position = PhysVector(350, 0);
+
+    bullet4.initialPos = bullet4.position;
+    bullet4.particleShape.setPosition(renderPoint4.x, renderPoint4.y);
+
+
+    //BULLET 5
+    PhysParticle bullet5;
+    bullet5.name = "Bullet 5";
+    bullet5.mass = 1.5;
+    //PhysVector dir3 = PhysVector(1, 0);
+    //bullet3.addForce(dir3 * 50);
+    bullet5.velocity = PhysVector(0, 0);
+
+    bullet5.particleShape.setRadius(15.0f);
+    bullet5.radius = bullet5.particleShape.getRadius();
+    bullet5.particleShape.setFillColor(sf::Color::Yellow);
+    bullet5.particleShape.setOrigin(bullet5.particleShape.getRadius(), bullet5.particleShape.getRadius());
+
+    PhysVector renderPoint5 = bullet5.toRenderPoint();
+    bullet5.position = PhysVector(385, 0);
+
+    bullet5.initialPos = bullet5.position;
+    bullet5.particleShape.setPosition(renderPoint5.x, renderPoint5.y);
+
+
+    //ADDING PARTICLES TO PHYSICS WORLD
+    pWorld.addParticle(&bullet);
+    pWorld.addParticle(&bullet2);
+    pWorld.addParticle(&bullet3);
+    pWorld.addParticle(&bullet4);
+    pWorld.addParticle(&bullet5);
+
 
     sf::Clock clock;
     sf::Time timeSinceLast = sf::Time::Zero;
@@ -140,11 +167,6 @@ int main()
 
 
             pWorld.update(TimePerFrame.asMilliseconds() / 1000.0f);
-            //contact.resolve(TimePerFrame.asMilliseconds() / 1000.0f);
-
-
-            //cout << "V of a: " << bullet.velocity.x << ", " << bullet.velocity.y << endl;
-            //cout << "V of b: " << bullet2.velocity.x << ", " << bullet2.velocity.y << endl;
 
             PhysVector renderPoint1 = bullet.toRenderPoint();
             bullet.particleShape.setPosition(renderPoint1.x, renderPoint1.y);
@@ -152,8 +174,14 @@ int main()
             PhysVector renderPoint2 = bullet2.toRenderPoint();
             bullet2.particleShape.setPosition(renderPoint2.x, renderPoint2.y);
 
-            //PhysVector renderPoint3 = bullet3.toRenderPoint();
-            //bullet3.particleShape.setPosition(renderPoint3.x, renderPoint3.y);
+            PhysVector renderPoint3 = bullet3.toRenderPoint();
+            bullet3.particleShape.setPosition(renderPoint3.x, renderPoint3.y);
+
+            PhysVector renderPoint4 = bullet4.toRenderPoint();
+            bullet4.particleShape.setPosition(renderPoint4.x, renderPoint4.y);
+
+            PhysVector renderPoint5 = bullet5.toRenderPoint();
+            bullet5.particleShape.setPosition(renderPoint5.x, renderPoint5.y);
 
             //bullet.particleShape.setPosition(bullet.position.x, bullet.position.y);
             //bullet2.particleShape.setPosition(bullet2.position.x, bullet2.position.y);
@@ -163,10 +191,10 @@ int main()
                 window.close();
             else if (event.type == sf::Event::KeyPressed)
             {
-                if (event.key.code == sf::Keyboard::Enter)
+                if (event.key.code == sf::Keyboard::Space)
                 {
-                    bullet.velocity = PhysVector(-30, 5);
-                    bullet2.velocity = PhysVector(100, 5);
+                    bullet.velocity = PhysVector(30, 0);
+                    bullet2.velocity = PhysVector(0, 0);
                 }
             }
 
@@ -176,6 +204,9 @@ int main()
             {
                 window.draw(bullet.particleShape);
                 window.draw(bullet2.particleShape);
+                window.draw(bullet3.particleShape);
+                window.draw(bullet4.particleShape);
+                window.draw(bullet5.particleShape);
                 //window.draw(bullet3.particleShape);
             }
                 
