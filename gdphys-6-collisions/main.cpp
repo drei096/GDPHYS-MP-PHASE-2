@@ -42,7 +42,7 @@ int main()
     bullet.mass = 5.0f;
     //PhysVector dir = PhysVector(-1, 0);
     //bullet.addForce(dir * 50);
-    bullet.velocity = PhysVector(-30, 5);
+    
 
     bullet.particleShape.setRadius(50.0f);
     bullet.radius = bullet.particleShape.getRadius();
@@ -56,7 +56,7 @@ int main()
     bullet.particleShape.setPosition(renderPoint1.x, renderPoint1.y);
     //bullet.particleShape.setPosition(bullet.position.x, bullet.position.y);
 
-    pWorld.addParticle(&bullet);
+   
 
     //NEEDS WORK
     //DragForceGenerator dF = DragForceGenerator(0.1,0.01);
@@ -70,7 +70,7 @@ int main()
     bullet2.mass = 1.5;
     //PhysVector dir2 = PhysVector(1, 0);
     //bullet2.addForce(dir2 * 50);
-    bullet2.velocity = PhysVector(100, 5);
+    
 
     bullet2.particleShape.setRadius(50.0f);
     bullet2.radius = bullet2.particleShape.getRadius();
@@ -86,7 +86,9 @@ int main()
     //BungeeSpring bS = BungeeSpring(bullet2.position, 5, 20);
     //AnchoredSpring aS = AnchoredSpring(bullet2.position, 5, 1);
 
+    pWorld.addParticle(&bullet);
     pWorld.addParticle(&bullet2);
+    
     //pWorld.registry.add(&bullet2, &bS);
 
     /*
@@ -159,6 +161,14 @@ int main()
             window.pollEvent(event);
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Enter)
+                {
+                    bullet.velocity = PhysVector(-30, 5);
+                    bullet2.velocity = PhysVector(100, 5);
+                }
+            }
 
             window.clear();
 
