@@ -15,15 +15,19 @@
 #include "P6 Components/Springs/AnchoredSpring.h"
 #include "P6 Components/Springs/BungeeSpring.h"
 #include "P6 Components/Collision/ParticleContact.h"
+#include "P6 Components/Links/Rod.h"
+#include "P6 Components/Links/ParticleLink.h"
+#include "P6 Components/Links/Cable.h"
 
-/*NOTES 5/6/2021 11:38 AM
+/*NOTES 5/8/2021 11:28 AM
 * Added working collision
 * Manually added 5 particles
 * Collision works when user presses SPACE to start sim
+* USER CAN MODIFY GRAVITY AT GRAVITYFORCEGENERATOR.H
 * 
 * WHAT NEEDS TO BE ADDED:
 * - cable class implementation (i already added a Cable class)
-* - fix initial velocity when user starts simulation
+* - implement gravity na hindi sumasagad pababa yung particles and cable
 */
 
 
@@ -145,6 +149,11 @@ int main()
     bullet5.initialPos = bullet5.position;
     bullet5.particleShape.setPosition(renderPoint5.x, renderPoint5.y);
 
+    //ADD CABLE
+    Cable* c = new Cable();
+    c->particles[0] = &bullet;
+    c->length = 80;
+    c->anchorPoint = PhysVector(245, 80);
 
     //ADDING PARTICLES TO PHYSICS WORLD
     pWorld.addParticle(&bullet);
@@ -152,6 +161,10 @@ int main()
     pWorld.addParticle(&bullet3);
     pWorld.addParticle(&bullet4);
     pWorld.addParticle(&bullet5);
+
+
+    //ADDING CABLE TO PHYSICS WORLD
+    pWorld.links.push_back(c);
 
 
     sf::Clock clock;
@@ -193,8 +206,11 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::Space)
                 {
-                    bullet.velocity = PhysVector(30, 0);
+                    bullet.velocity = PhysVector(-30, 10);
                     bullet2.velocity = PhysVector(0, 0);
+                    bullet3.velocity = PhysVector(0, 0);
+                    bullet4.velocity = PhysVector(0, 0);
+                    bullet5.velocity = PhysVector(0, 0);
                 }
             }
 
@@ -207,8 +223,17 @@ int main()
                 window.draw(bullet3.particleShape);
                 window.draw(bullet4.particleShape);
                 window.draw(bullet5.particleShape);
-                //window.draw(bullet3.particleShape);
             }
+
+            PhysVector bullet1toSFML = Utils::p6ToSFMLPoint(bullet.position);
+
+            sf::Vertex line1[] = {
+                sf::Vertex(sf::Vector2f(c->anchorPoint.x,c->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(bullet1toSFML.x,bullet1toSFML.y))
+            };
+
+            if(c->length <= 80)
+                window.draw(line1, 2, sf::Lines);
                 
 
             window.display();

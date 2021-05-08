@@ -1,11 +1,12 @@
 #pragma once
 #include "ParticleLink.h"
-class Rod : public ParticleLink
+class Cable : public ParticleLink
 {
 public:
-	float length = 1;
+	float length;
 	float restitution = 0;
-
+	PhysVector anchorPoint = PhysVector(0,0);
+	
 	ParticleContact* getContact() override;
 };
 
