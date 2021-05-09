@@ -3,7 +3,7 @@
 class GravityForceGenerator : public ForceGenerator
 {
 private:
-	PhysVector gravity = PhysVector(0, 0);
+	PhysVector gravity = PhysVector(0, -9.8);
 public:
 	GravityForceGenerator(PhysVector g) : gravity(g) {};
 	GravityForceGenerator() {}

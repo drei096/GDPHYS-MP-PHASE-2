@@ -10,7 +10,7 @@ public:
 	string name;
 	float mass;
 	float radius;
-	float restitution = 0.6;
+	float restitution = 1;
 	sf::Clock timer;
 	PhysVector position = PhysVector(0, 0);
 	PhysVector velocity = PhysVector(0, 0);

@@ -19,15 +19,17 @@
 #include "P6 Components/Links/ParticleLink.h"
 #include "P6 Components/Links/Cable.h"
 
-/*NOTES 5/8/2021 11:28 AM
+/*NOTES 5/9/2021 10:58 AM
 * Added working collision
 * Manually added 5 particles
 * Collision works when user presses SPACE to start sim
 * USER CAN MODIFY GRAVITY AT GRAVITYFORCEGENERATOR.H
+* Simulation works!
 * 
-* WHAT NEEDS TO BE ADDED:
-* - cable class implementation (i already added a Cable class)
-* - implement gravity na hindi sumasagad pababa yung particles and cable
+* WHAT NEEDS TO BE FIXED:
+* - cable class implementation (i already added a Cable class) (parang may mali, pacheck nalang)
+* - rendering ng lines sa main (nagsshorten kasi siya kapag diagonal movement na, check mo yung simulation)
+* - actual collision ng cradle, kasi feel ko hindi yan siya dapat ganyan HAAHAH
 */
 
 
@@ -149,11 +151,31 @@ int main()
     bullet5.initialPos = bullet5.position;
     bullet5.particleShape.setPosition(renderPoint5.x, renderPoint5.y);
 
-    //ADD CABLE
-    Cable* c = new Cable();
-    c->particles[0] = &bullet;
-    c->length = 80;
-    c->anchorPoint = PhysVector(245, 80);
+    //ADD CABLES
+    Cable* c1 = new Cable();
+    c1->particles[0] = &bullet;
+    c1->length = 80;
+    c1->anchorPoint = PhysVector(245, 80);
+
+    Cable* c2 = new Cable();
+    c2->particles[0] = &bullet2;
+    c2->length = 80;
+    c2->anchorPoint = PhysVector(280, 80);
+
+    Cable* c3 = new Cable();
+    c3->particles[0] = &bullet3;
+    c3->length = 80;
+    c3->anchorPoint = PhysVector(315, 80);
+
+    Cable* c4 = new Cable();
+    c4->particles[0] = &bullet4;
+    c4->length = 80;
+    c4->anchorPoint = PhysVector(350, 80);
+
+    Cable* c5 = new Cable();
+    c5->particles[0] = &bullet5;
+    c5->length = 80;
+    c5->anchorPoint = PhysVector(385, 80);
 
     //ADDING PARTICLES TO PHYSICS WORLD
     pWorld.addParticle(&bullet);
@@ -164,7 +186,11 @@ int main()
 
 
     //ADDING CABLE TO PHYSICS WORLD
-    pWorld.links.push_back(c);
+    pWorld.links.push_back(c1);
+    pWorld.links.push_back(c2);
+    pWorld.links.push_back(c3);
+    pWorld.links.push_back(c4);
+    pWorld.links.push_back(c5);
 
 
     sf::Clock clock;
@@ -206,11 +232,7 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::Space)
                 {
-                    bullet.velocity = PhysVector(-30, 10);
-                    bullet2.velocity = PhysVector(0, 0);
-                    bullet3.velocity = PhysVector(0, 0);
-                    bullet4.velocity = PhysVector(0, 0);
-                    bullet5.velocity = PhysVector(0, 0);
+                    bullet.addForce(PhysVector(-8000, 500));
                 }
             }
 
@@ -226,14 +248,41 @@ int main()
             }
 
             PhysVector bullet1toSFML = Utils::p6ToSFMLPoint(bullet.position);
+            PhysVector bullet2toSFML = Utils::p6ToSFMLPoint(bullet2.position);
+            PhysVector bullet3toSFML = Utils::p6ToSFMLPoint(bullet3.position);
+            PhysVector bullet4toSFML = Utils::p6ToSFMLPoint(bullet4.position);
+            PhysVector bullet5toSFML = Utils::p6ToSFMLPoint(bullet5.position);
 
             sf::Vertex line1[] = {
-                sf::Vertex(sf::Vector2f(c->anchorPoint.x,c->anchorPoint.y)),
-                sf::Vertex(sf::Vector2f(bullet1toSFML.x,bullet1toSFML.y))
+                sf::Vertex(sf::Vector2f(c1->anchorPoint.x,c1->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(bullet1toSFML.x ,bullet1toSFML.y))
             };
 
-            if(c->length <= 80)
-                window.draw(line1, 2, sf::Lines);
+            sf::Vertex line2[] = {
+                sf::Vertex(sf::Vector2f(c2->anchorPoint.x,c2->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(bullet2toSFML.x,bullet2toSFML.y))
+            };
+
+            sf::Vertex line3[] = {
+                sf::Vertex(sf::Vector2f(c3->anchorPoint.x,c3->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(bullet3toSFML.x,bullet3toSFML.y))
+            };
+
+            sf::Vertex line4[] = {
+                sf::Vertex(sf::Vector2f(c4->anchorPoint.x,c4->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(bullet4toSFML.x,bullet4toSFML.y))
+            };
+
+            sf::Vertex line5[] = {
+                sf::Vertex(sf::Vector2f(c5->anchorPoint.x,c5->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(bullet5toSFML.x,bullet5toSFML.y))
+            };
+
+            window.draw(line1, 2, sf::Lines);
+            window.draw(line2, 2, sf::Lines);
+            window.draw(line3, 2, sf::Lines);
+            window.draw(line4, 2, sf::Lines);
+            window.draw(line5, 2, sf::Lines);
                 
 
             window.display();

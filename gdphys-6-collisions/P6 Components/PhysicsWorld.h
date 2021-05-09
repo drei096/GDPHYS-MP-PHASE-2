@@ -18,7 +18,7 @@ public:
 	list <ParticleLink*> links;
 
 	//Change Gravity Value here
-	PhysVector gravity = PhysVector(0, 0);  // 20m/s2 down
+	//PhysVector gravity = PhysVector(0, 0);  // 20m/s2 down
 
 	vector<ParticleContact*> contacts;
 
