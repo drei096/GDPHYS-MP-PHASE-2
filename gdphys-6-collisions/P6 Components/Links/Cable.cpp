@@ -22,7 +22,7 @@ ParticleContact* Cable::getContact()
 
 	std::cout << "curr length of cable: " << curr_len << std::endl;
 
-	std::cout << "dir: " << dir.x << "," << dir.y << std::endl;
+	std::cout << "dir x: " << dir.x << "," << dir.y << std::endl;
 
 	if (curr_len > length)
 	{
@@ -30,12 +30,13 @@ ParticleContact* Cable::getContact()
 		ret->collisonNormal = dir;
 		ret->depth = curr_len - length;
 	}
+	/*
 	else if (curr_len < length)
 	{
 		ret->collisonNormal = dir * -1;
 		ret->depth = length - curr_len;
 	}
-	
+	*/
 	ret->restitution = restitution;
 
 	return ret;

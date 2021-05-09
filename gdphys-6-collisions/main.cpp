@@ -19,7 +19,7 @@
 #include "P6 Components/Links/ParticleLink.h"
 #include "P6 Components/Links/Cable.h"
 
-/*NOTES 5/9/2021 10:58 AM
+/*NOTES 5/9/2021 4:09 PM
 * Added working collision
 * Manually added 5 particles
 * Collision works when user presses SPACE to start sim
@@ -27,9 +27,7 @@
 * Simulation works!
 * 
 * WHAT NEEDS TO BE FIXED:
-* - cable class implementation (i already added a Cable class) (parang may mali, pacheck nalang)
-* - rendering ng lines sa main (nagsshorten kasi siya kapag diagonal movement na, check mo yung simulation)
-* - actual collision ng cradle, kasi feel ko hindi yan siya dapat ganyan HAAHAH
+* - final checks nalang and code cleanup? HAHAHAH
 */
 
 
@@ -75,7 +73,7 @@ int main()
     //BULLET 2
     PhysParticle bullet2;
     bullet2.name = "Bullet 2";
-    bullet2.mass = 1.5;
+    bullet2.mass = 5.0f;
     //PhysVector dir2 = PhysVector(1, 0);
     //bullet2.addForce(dir2 * 50);
     
@@ -95,7 +93,7 @@ int main()
     //BULLET 3
     PhysParticle bullet3;
     bullet3.name = "Bullet 3";
-    bullet3.mass = 1.5;
+    bullet3.mass = 5.0f;
     //PhysVector dir3 = PhysVector(1, 0);
     //bullet3.addForce(dir3 * 50);
     bullet3.velocity = PhysVector(0, 0);
@@ -115,7 +113,7 @@ int main()
     //BULLET 4
     PhysParticle bullet4;
     bullet4.name = "Bullet 4";
-    bullet4.mass = 1.5;
+    bullet4.mass = 5.0f;
     //PhysVector dir3 = PhysVector(1, 0);
     //bullet3.addForce(dir3 * 50);
     bullet4.velocity = PhysVector(0, 0);
@@ -135,7 +133,7 @@ int main()
     //BULLET 5
     PhysParticle bullet5;
     bullet5.name = "Bullet 5";
-    bullet5.mass = 1.5;
+    bullet5.mass = 5.0f;
     //PhysVector dir3 = PhysVector(1, 0);
     //bullet3.addForce(dir3 * 50);
     bullet5.velocity = PhysVector(0, 0);
@@ -232,7 +230,7 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::Space)
                 {
-                    bullet.addForce(PhysVector(-8000, 500));
+                    bullet.addForce(PhysVector(-8000, 0));
                 }
             }
 
@@ -283,6 +281,7 @@ int main()
             window.draw(line3, 2, sf::Lines);
             window.draw(line4, 2, sf::Lines);
             window.draw(line5, 2, sf::Lines);
+            
                 
 
             window.display();

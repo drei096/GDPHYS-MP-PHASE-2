@@ -91,10 +91,12 @@ void ParticleContact::resolveVelocity(float time)
 
 	PhysVector v_0 = impulse * (1.0f / particles[0]->mass);
 	particles[0]->velocity = (particles[0]->velocity + v_0);
+	
 
 	if (particles[1])
 	{
 		PhysVector v_1 = impulse * (-1.0f / particles[1]->mass);
 		particles[1]->velocity = (particles[1]->velocity + v_1);
+		
 	}
 }
