@@ -11,7 +11,6 @@ void PhysParticle::update(float time)
 	}
 	updatePos(time);
 	updateVelocity(time);
-	//updateDestroyed();
 	resetForce();
 }
 

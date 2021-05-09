@@ -49,15 +49,16 @@ int main()
     sf::Event event;
     Utils::offset = PhysVector(0, 250);
 
+    //////////////////////////////////////////////////////////////////////////////////////
 
     //Bullet 1 particle
     PhysParticle bullet;
     bullet.name = "Bullet 1";
+
+    //EDIT MASS HERE
     bullet.mass = 5.0f;
     //PhysVector dir = PhysVector(-1, 0);
-    //bullet.addForce(dir * 50);
     
-
     bullet.particleShape.setRadius(15.0f);
     bullet.radius = bullet.particleShape.getRadius();
     bullet.particleShape.setFillColor(sf::Color::White);
@@ -73,10 +74,10 @@ int main()
     //BULLET 2
     PhysParticle bullet2;
     bullet2.name = "Bullet 2";
+
+    //EDIT MASS HERE
     bullet2.mass = 5.0f;
     //PhysVector dir2 = PhysVector(1, 0);
-    //bullet2.addForce(dir2 * 50);
-    
 
     bullet2.particleShape.setRadius(15.0f);
     bullet2.radius = bullet2.particleShape.getRadius();
@@ -93,10 +94,10 @@ int main()
     //BULLET 3
     PhysParticle bullet3;
     bullet3.name = "Bullet 3";
+
+    //EDIT MASS HERE
     bullet3.mass = 5.0f;
     //PhysVector dir3 = PhysVector(1, 0);
-    //bullet3.addForce(dir3 * 50);
-    bullet3.velocity = PhysVector(0, 0);
 
     bullet3.particleShape.setRadius(15.0f);
     bullet3.radius = bullet3.particleShape.getRadius();
@@ -113,11 +114,11 @@ int main()
     //BULLET 4
     PhysParticle bullet4;
     bullet4.name = "Bullet 4";
+
+    //EDIT MASS HERE
     bullet4.mass = 5.0f;
     //PhysVector dir3 = PhysVector(1, 0);
-    //bullet3.addForce(dir3 * 50);
-    bullet4.velocity = PhysVector(0, 0);
-
+    
     bullet4.particleShape.setRadius(15.0f);
     bullet4.radius = bullet4.particleShape.getRadius();
     bullet4.particleShape.setFillColor(sf::Color::Red);
@@ -133,10 +134,10 @@ int main()
     //BULLET 5
     PhysParticle bullet5;
     bullet5.name = "Bullet 5";
+
+    //EDIT MASS HERE
     bullet5.mass = 5.0f;
     //PhysVector dir3 = PhysVector(1, 0);
-    //bullet3.addForce(dir3 * 50);
-    bullet5.velocity = PhysVector(0, 0);
 
     bullet5.particleShape.setRadius(15.0f);
     bullet5.radius = bullet5.particleShape.getRadius();
@@ -149,31 +150,33 @@ int main()
     bullet5.initialPos = bullet5.position;
     bullet5.particleShape.setPosition(renderPoint5.x, renderPoint5.y);
 
+    ////////////////////////////////////////////////////////////////////////////////////
+
     //ADD CABLES
     Cable* c1 = new Cable();
     c1->particles[0] = &bullet;
     c1->length = 80;
-    c1->anchorPoint = PhysVector(245, 80);
+    c1->anchorPoint = PhysVector(bullet.position.x, 80);
 
     Cable* c2 = new Cable();
     c2->particles[0] = &bullet2;
     c2->length = 80;
-    c2->anchorPoint = PhysVector(280, 80);
+    c2->anchorPoint = PhysVector(bullet2.position.x, 80);
 
     Cable* c3 = new Cable();
     c3->particles[0] = &bullet3;
     c3->length = 80;
-    c3->anchorPoint = PhysVector(315, 80);
+    c3->anchorPoint = PhysVector(bullet3.position.x, 80);
 
     Cable* c4 = new Cable();
     c4->particles[0] = &bullet4;
     c4->length = 80;
-    c4->anchorPoint = PhysVector(350, 80);
+    c4->anchorPoint = PhysVector(bullet4.position.x, 80);
 
     Cable* c5 = new Cable();
     c5->particles[0] = &bullet5;
     c5->length = 80;
-    c5->anchorPoint = PhysVector(385, 80);
+    c5->anchorPoint = PhysVector(bullet5.position.x, 80);
 
     //ADDING PARTICLES TO PHYSICS WORLD
     pWorld.addParticle(&bullet);
@@ -183,7 +186,7 @@ int main()
     pWorld.addParticle(&bullet5);
 
 
-    //ADDING CABLE TO PHYSICS WORLD
+    //ADDING CABLES TO PHYSICS WORLD
     pWorld.links.push_back(c1);
     pWorld.links.push_back(c2);
     pWorld.links.push_back(c3);
@@ -220,8 +223,6 @@ int main()
             PhysVector renderPoint5 = bullet5.toRenderPoint();
             bullet5.particleShape.setPosition(renderPoint5.x, renderPoint5.y);
 
-            //bullet.particleShape.setPosition(bullet.position.x, bullet.position.y);
-            //bullet2.particleShape.setPosition(bullet2.position.x, bullet2.position.y);
 
             window.pollEvent(event);
             if (event.type == sf::Event::Closed)
@@ -230,7 +231,9 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::Space)
                 {
-                    bullet.addForce(PhysVector(-8000, 0));
+                    //EDIT INITIAL FORCE APPLIED HERE
+
+                    bullet.addForce(PhysVector(-8000,100));
                 }
             }
 
