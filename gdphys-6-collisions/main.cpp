@@ -51,6 +51,9 @@ int main()
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    //Modify cable length here
+    float cableLength = 80;
+
     //Bullet 1 particle
     PhysParticle bullet;
     bullet.name = "Bullet 1";
@@ -156,35 +159,35 @@ int main()
     Cable* c1 = new Cable();
     c1->particles[0] = &bullet;
     c1->length = 80;
-    c1->anchorPoint = PhysVector(bullet.position.x, 80);
+    c1->anchorPoint = PhysVector(bullet.position.x, cableLength);
 
     Cable* c2 = new Cable();
     c2->particles[0] = &bullet2;
     c2->length = 80;
-    c2->anchorPoint = PhysVector(bullet2.position.x, 80);
+    c2->anchorPoint = PhysVector(bullet2.position.x, cableLength);
 
     Cable* c3 = new Cable();
     c3->particles[0] = &bullet3;
     c3->length = 80;
-    c3->anchorPoint = PhysVector(bullet3.position.x, 80);
+    c3->anchorPoint = PhysVector(bullet3.position.x, cableLength);
 
     Cable* c4 = new Cable();
     c4->particles[0] = &bullet4;
     c4->length = 80;
-    c4->anchorPoint = PhysVector(bullet4.position.x, 80);
+    c4->anchorPoint = PhysVector(bullet4.position.x, cableLength);
 
     Cable* c5 = new Cable();
     c5->particles[0] = &bullet5;
     c5->length = 80;
-    c5->anchorPoint = PhysVector(bullet5.position.x, 80);
+    c5->anchorPoint = PhysVector(bullet5.position.x, cableLength);
 
     ///////////////////////////////////////////////////////////////////////////////
 
-    PhysVector anchor1 = PhysVector(c1->anchorPoint.x, renderPoint1.y - 80);
-    PhysVector anchor2 = PhysVector(c2->anchorPoint.x, renderPoint2.y - 80);
-    PhysVector anchor3 = PhysVector(c3->anchorPoint.x, renderPoint3.y - 80);
-    PhysVector anchor4 = PhysVector(c4->anchorPoint.x, renderPoint4.y - 80);
-    PhysVector anchor5 = PhysVector(c5->anchorPoint.x, renderPoint5.y - 80);
+    PhysVector anchor1 = PhysVector(c1->anchorPoint.x, renderPoint1.y - cableLength);
+    PhysVector anchor2 = PhysVector(c2->anchorPoint.x, renderPoint2.y - cableLength);
+    PhysVector anchor3 = PhysVector(c3->anchorPoint.x, renderPoint3.y - cableLength);
+    PhysVector anchor4 = PhysVector(c4->anchorPoint.x, renderPoint4.y - cableLength);
+    PhysVector anchor5 = PhysVector(c5->anchorPoint.x, renderPoint5.y - cableLength);
 
     //////////////////////////////////////////////////////////////////////////////
 
