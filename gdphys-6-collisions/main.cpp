@@ -38,7 +38,7 @@ int main()
     PhysicsWorld pWorld = PhysicsWorld();
 
 
-    sf::RenderWindow window(sf::VideoMode(720, 720), "P6 Test");
+    sf::RenderWindow window(sf::VideoMode(720, 500), "P6 Test");
 
 
     sf::Event event;
