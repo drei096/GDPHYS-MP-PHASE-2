@@ -68,16 +68,13 @@ void ParticleContact::resolveVelocity(float time)
 
 	float sF = -restitution * separatingSpeed;
 	float deltaSpeed = sF - separatingSpeed;
-	std::cout << "delta speed: " << deltaSpeed << std::endl;
+	
 	float totalMass = 1.0f / particles[0]->mass;
 	
 
 	if (particles[1])
 		totalMass += 1.0f / particles[1]->mass;
 
-	std::cout << "total mass: " << totalMass << std::endl;
-
-	std::cout << "dS / tM: " << deltaSpeed/totalMass << std::endl << std::endl;
 
 	if (totalMass <= 0)
 	{

@@ -19,15 +19,10 @@
 #include "P6 Components/Links/ParticleLink.h"
 #include "P6 Components/Links/Cable.h"
 
-/*NOTES 5/9/2021 4:09 PM
-* Added working collision
-* Manually added 5 particles
-* Collision works when user presses SPACE to start sim
-* USER CAN MODIFY GRAVITY AT GRAVITYFORCEGENERATOR.H
-* Simulation works!
-* 
-* WHAT NEEDS TO BE FIXED:
-* - final checks nalang and code cleanup? HAHAHAH
+/* GDPHYS MP PHASE 2 - MASS AGGREGATE SYSTEM
+* DEVELOPERS:
+* GAURANA, ALDREY
+* TALLADOR, ERYN
 */
 
 
@@ -51,8 +46,8 @@ int main()
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    //Modify cable length here
-    float cableLength = 200;
+    //MODIFY CABLE LENGTH HERE
+    float cableLength = 150;
 
     //Bullet 1 particle
     PhysParticle bullet;
