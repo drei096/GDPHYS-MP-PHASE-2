@@ -43,7 +43,7 @@ int main()
     PhysicsWorld pWorld = PhysicsWorld();
 
 
-    sf::RenderWindow window(sf::VideoMode(720, 500), "P6 Test");
+    sf::RenderWindow window(sf::VideoMode(720, 720), "P6 Test");
 
 
     sf::Event event;
@@ -178,6 +178,16 @@ int main()
     c5->length = 80;
     c5->anchorPoint = PhysVector(bullet5.position.x, 80);
 
+    ///////////////////////////////////////////////////////////////////////////////
+
+    PhysVector anchor1 = PhysVector(c1->anchorPoint.x, renderPoint1.y - 80);
+    PhysVector anchor2 = PhysVector(c2->anchorPoint.x, renderPoint2.y - 80);
+    PhysVector anchor3 = PhysVector(c3->anchorPoint.x, renderPoint3.y - 80);
+    PhysVector anchor4 = PhysVector(c4->anchorPoint.x, renderPoint4.y - 80);
+    PhysVector anchor5 = PhysVector(c5->anchorPoint.x, renderPoint5.y - 80);
+
+    //////////////////////////////////////////////////////////////////////////////
+
     //ADDING PARTICLES TO PHYSICS WORLD
     pWorld.addParticle(&bullet);
     pWorld.addParticle(&bullet2);
@@ -233,7 +243,7 @@ int main()
                 {
                     //EDIT INITIAL FORCE APPLIED HERE
 
-                    bullet.addForce(PhysVector(-8000,100));
+                    bullet.addForce(PhysVector(-8000,0));
                 }
             }
 
@@ -255,27 +265,27 @@ int main()
             PhysVector bullet5toSFML = Utils::p6ToSFMLPoint(bullet5.position);
 
             sf::Vertex line1[] = {
-                sf::Vertex(sf::Vector2f(c1->anchorPoint.x,c1->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(anchor1.x,anchor1.y)),
                 sf::Vertex(sf::Vector2f(bullet1toSFML.x ,bullet1toSFML.y))
             };
 
             sf::Vertex line2[] = {
-                sf::Vertex(sf::Vector2f(c2->anchorPoint.x,c2->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(anchor2.x,anchor2.y)),
                 sf::Vertex(sf::Vector2f(bullet2toSFML.x,bullet2toSFML.y))
             };
 
             sf::Vertex line3[] = {
-                sf::Vertex(sf::Vector2f(c3->anchorPoint.x,c3->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(anchor3.x,anchor3.y)),
                 sf::Vertex(sf::Vector2f(bullet3toSFML.x,bullet3toSFML.y))
             };
 
             sf::Vertex line4[] = {
-                sf::Vertex(sf::Vector2f(c4->anchorPoint.x,c4->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(anchor4.x,anchor4.y)),
                 sf::Vertex(sf::Vector2f(bullet4toSFML.x,bullet4toSFML.y))
             };
 
             sf::Vertex line5[] = {
-                sf::Vertex(sf::Vector2f(c5->anchorPoint.x,c5->anchorPoint.y)),
+                sf::Vertex(sf::Vector2f(anchor5.x,anchor5.y)),
                 sf::Vertex(sf::Vector2f(bullet5toSFML.x,bullet5toSFML.y))
             };
 

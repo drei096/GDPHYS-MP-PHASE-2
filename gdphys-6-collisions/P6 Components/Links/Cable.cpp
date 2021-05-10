@@ -12,7 +12,6 @@ ParticleContact* Cable::getContact()
 	if (curr_len == length)
 		return nullptr;
 
-
 	ParticleContact* ret = new ParticleContact();
 	ret->particles[0] = particles[0];
 	ret->particles[1] = NULL;
